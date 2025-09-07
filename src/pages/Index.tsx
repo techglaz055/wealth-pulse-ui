@@ -307,7 +307,7 @@ const Index = () => {
 
           {/* Charts Section */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Clients Pie Chart */}
+            {/* Clients Bubble Chart */}
             <Card className="animate-card-enter animate-card-hover" style={{ animationDelay: '0.8s' }}>
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>CLIENTS</CardTitle>
@@ -327,23 +327,48 @@ const Index = () => {
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                   </div>
                 ) : (
-                  <ResponsiveContainer width="100%" height={250}>
-                    <PieChart>
-                      <Pie
-                        data={data?.pieData || mockData.pieData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={40}
-                        outerRadius={80}
-                        dataKey="value"
-                      >
-                        {(data?.pieData || mockData.pieData).map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                    </PieChart>
-                  </ResponsiveContainer>
+                  <>
+                    {/* Bubble Chart */}
+                    <div className="relative h-48 flex items-center justify-center mb-4">
+                      <svg width="200" height="180" viewBox="0 0 200 180" className="overflow-visible">
+                        {/* Main large red circle - Active */}
+                        <circle cx="100" cy="90" r="45" fill="#ef4444" opacity="0.9" />
+                        <text x="100" y="95" textAnchor="middle" className="fill-white font-bold text-lg">3824</text>
+                        
+                        {/* Medium red circle - Inactive */}
+                        <circle cx="75" cy="75" r="25" fill="#dc2626" opacity="0.8" />
+                        <text x="75" y="80" textAnchor="middle" className="fill-white font-semibold text-sm">541</text>
+                        
+                        {/* Orange circle - Online */}
+                        <circle cx="120" cy="60" r="18" fill="#f97316" opacity="0.9" />
+                        <text x="120" y="65" textAnchor="middle" className="fill-white font-semibold text-xs">60</text>
+                        
+                        {/* Small green circle - New */}
+                        <circle cx="140" cy="110" r="12" fill="#22c55e" opacity="0.9" />
+                        <text x="140" y="115" textAnchor="middle" className="fill-white font-semibold text-xs">2</text>
+                      </svg>
+                    </div>
+                    
+                    {/* Legend */}
+                    <div className="flex justify-center space-x-4">
+                      <div className="flex items-center space-x-1">
+                        <div className="w-3 h-3 rounded-full bg-orange-500"></div>
+                        <span className="text-xs text-muted-foreground">Online</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span className="text-xs text-muted-foreground">New</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                        <span className="text-xs text-muted-foreground">Active</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <div className="w-3 h-3 rounded-full bg-red-600"></div>
+                        <span className="text-xs text-muted-foreground">Inactive</span>
+                      </div>
+                    </div>
+                  </>
                 )}
               </CardContent>
             </Card>
