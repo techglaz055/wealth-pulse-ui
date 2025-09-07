@@ -104,12 +104,12 @@ const Index = () => {
 
       <div className="bg-background text-foreground">
         {/* Header */}
-        <header className="bg-card border-b border-border">
+        <header className="bg-red-500 shadow-lg">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
               <div className="flex items-center">
-                <div className="text-2xl font-bold text-primary">Health Elite</div>
+                <div className="text-2xl font-bold text-white">WealthElite</div>
               </div>
 
               {/* Desktop Navigation */}
@@ -117,10 +117,10 @@ const Index = () => {
                 {navItems.map((item, index) => (
                   <button
                     key={item}
-                    className={`px-3 py-2 rounded-md text-sm font-medium btn-hover transition-colors ${
+                    className={`px-4 py-2 text-sm font-medium btn-hover transition-colors ${
                       index === 0 
-                        ? 'bg-red-500 text-white' 
-                        : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                        ? 'bg-white text-red-500 rounded-md' 
+                        : 'text-white hover:bg-red-600 rounded-md'
                     }`}
                   >
                     {item}
@@ -131,7 +131,7 @@ const Index = () => {
               {/* Mobile menu button */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent"
+                className="lg:hidden p-2 rounded-md text-white hover:bg-red-600"
               >
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
@@ -139,15 +139,15 @@ const Index = () => {
 
             {/* Mobile Navigation */}
             {isMobileMenuOpen && (
-              <div className="lg:hidden py-4 border-t border-border">
+              <div className="lg:hidden py-4 border-t border-red-400">
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {navItems.map((item, index) => (
                     <button
                       key={item}
                       className={`px-3 py-2 rounded-md text-sm font-medium btn-hover transition-colors ${
                         index === 0 
-                          ? 'bg-red-500 text-white' 
-                          : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                          ? 'bg-white text-red-500' 
+                          : 'text-white hover:bg-red-600'
                       }`}
                     >
                       {item}
@@ -161,13 +161,24 @@ const Index = () => {
 
         {/* Main Content */}
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+          {/* Financial Dashboard Title */}
+          <div className="flex items-center justify-between">
+            <h1 className="text-3xl font-bold text-foreground">Financial Dashboard</h1>
+            <Button 
+              onClick={downloadPDF}
+              className="btn-hover btn-pulse bg-red-500 hover:bg-red-600 text-white px-6 py-2"
+            >
+              <Download className="h-4 w-4 mr-2" />
+              Export PDF
+            </Button>
+          </div>
           {/* Top Stats Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* AUM Card */}
             <Card className="animate-card-enter animate-card-hover" style={{ animationDelay: '0.1s' }}>
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">Current</CardTitle>
-                <Badge variant="outline" className="text-red-500 border-red-500">Live Report</Badge>
+                <Badge className="bg-red-500 text-white border-0">Live Report</Badge>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
@@ -189,7 +200,7 @@ const Index = () => {
             <Card className="animate-card-enter animate-card-hover" style={{ animationDelay: '0.2s' }}>
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">Current</CardTitle>
-                <Badge variant="outline" className="text-red-500 border-red-500">Live Report</Badge>
+                <Badge className="bg-red-500 text-white border-0">Live Report</Badge>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
@@ -253,7 +264,7 @@ const Index = () => {
                   variant="outline" 
                   size="sm" 
                   onClick={downloadPDF}
-                  className="btn-hover btn-pulse"
+                  className="btn-hover btn-pulse border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
                 >
                   <Download className="h-4 w-4 mr-2" />
                   Download Report
@@ -339,16 +350,6 @@ const Index = () => {
             </Card>
           </div>
 
-          {/* PDF Download Button */}
-          <div className="flex justify-center pt-6">
-            <Button 
-              onClick={downloadPDF}
-              className="btn-hover btn-pulse bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg"
-            >
-              <Download className="h-5 w-5 mr-2" />
-              Download Dashboard PDF
-            </Button>
-          </div>
         </main>
       </div>
     </div>
