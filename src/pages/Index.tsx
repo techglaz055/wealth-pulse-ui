@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, ComposedChart } from 'recharts';
 import { 
   TrendingUp, 
@@ -15,7 +16,12 @@ import {
   Sun,
   Moon,
   Menu,
-  X
+  X,
+  Search,
+  Bell,
+  Settings,
+  HelpCircle,
+  User
 } from 'lucide-react';
 
 const Index = () => {
@@ -103,21 +109,66 @@ const Index = () => {
       </button>
 
       <div className="bg-background text-foreground">
-        {/* Header */}
-        <header className="bg-red-500 shadow-lg">
+        {/* Top Navbar - Logo, Search, Icons */}
+        <header className="bg-white dark:bg-gray-900 shadow-sm border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
               <div className="flex items-center">
-                <div className="text-2xl font-bold text-white">WealthElite</div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-red-500 rounded text-white flex items-center justify-center text-sm font-bold">
+                    WE
+                  </div>
+                  <span className="text-xl font-bold text-foreground">WealthElite</span>
+                </div>
               </div>
 
+              {/* Search Bar - Desktop */}
+              <div className="hidden md:flex flex-1 max-w-lg mx-8">
+                <div className="relative w-full">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Search anything..."
+                    className="pl-10 w-full"
+                  />
+                </div>
+              </div>
+
+              {/* Right Icons */}
+              <div className="flex items-center space-x-2">
+                {/* Search for mobile */}
+                <button className="md:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                  <Search className="h-5 w-5" />
+                </button>
+                
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                  <Bell className="h-5 w-5" />
+                </button>
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                  <Settings className="h-5 w-5" />
+                </button>
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                  <HelpCircle className="h-5 w-5" />
+                </button>
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                  <User className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Second Navbar - Navigation Items */}
+        <header className="bg-red-500 shadow-lg">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-12">
               {/* Desktop Navigation */}
-              <nav className="hidden lg:flex space-x-1">
+              <nav className="hidden lg:flex space-x-1 w-full">
                 {navItems.map((item, index) => (
                   <button
                     key={item}
-                    className={`px-4 py-2 text-sm font-medium btn-hover transition-colors ${
+                    className={`px-3 py-2 text-sm font-medium btn-hover transition-colors ${
                       index === 0 
                         ? 'bg-white text-red-500 rounded-md' 
                         : 'text-white hover:bg-red-600 rounded-md'
@@ -133,7 +184,7 @@ const Index = () => {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="lg:hidden p-2 rounded-md text-white hover:bg-red-600"
               >
-                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>
             </div>
 
